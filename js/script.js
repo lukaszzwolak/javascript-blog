@@ -30,15 +30,40 @@ const titleClickHandler = function (event) {
   console.log('targetArticle', targetArticle);
   
   /* add class 'active' to the correct article */
-  console.log('clickedElement:', clickedElement);
   targetArticle.classList.add('active');
 };
 
-const links = document.querySelectorAll('.titles a');
+//generiwanie linkow tytulow artykolow
+const generateTitleLinks = function () {
+  console.log('funkcja generateTitleLinks wykonala się');
+  //szukanie kontenera na linki tytulow
+  const titleList = document.querySelector('.titles');
 
-for (let link of links) {
-  link.addEventListener('click', titleClickHandler);
-}
+  //wyczyszczenie zawartosci kontenera
+  titleList.innerHTML = '';
+
+  //znalezienie wszystkich artykulow
+  const articles = document.querySelectorAll('.posts .post');
+
+  //dla kazdego artykulu
+  for(let article of articles) {
+    const articleId = article.getAttribute('id');
+    const articleTitle = article.querySelector('.post-title').innerText;
+    
+    const linkHTML = `<li><a href="#${articleId}"><span>${articleTitle}</span></a></li>`;
+    titleList.innerHTML += linkHTML;
+  }
+
+  //nasluchiwanie klikniecia nowych linkow
+  const links = document.querySelectorAll('.titles a');
+  for (let link of links) {
+    link.addEventListener('click', titleClickHandler)
+  }
+};
+//wywoalnie generatetitlelinks po zaladowaniu strony
+generateTitleLinks();
+
+
 
 
 /*
