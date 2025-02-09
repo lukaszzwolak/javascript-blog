@@ -5,17 +5,19 @@ const titleClickHandler = function (event) {
   /* remove class 'active' from all article links  */
   const activeLinks = document.querySelectorAll('.titles a.active');
 
-  for (let activeLink of activeLink) {
+  for (let activeLink of activeLinks) {
     activeLink.classList.remove('active');
   }
 
   /* add class 'active' to the clicked link */
   console.log('clickedElement:', clickedElement);
+  //console.log('clickedElement (with plus): ' + clickedElement);
+  clickedElement.classList.add('active');
 
   /* remove class 'active' from all articles */
   const activeArticles = document.querySelectorAll('.posts a.active');
 
-  for (let activeArticle of activeArticle) {
+  for (let activeArticle of activeArticles) {
     activeArticle.classList.remove('active');
   }
 
