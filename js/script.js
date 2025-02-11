@@ -1,5 +1,5 @@
 const optArticleSelector = '.post',
-  optTitleSelector = 'h3.post-title',
+  optTitleSelector = '.post-title',
   optTitleListSelector = '.titles';
 
 const titleClickHandler = function (event) {
@@ -45,6 +45,10 @@ const generateTitleLinks = function () {
 
   //znalezienie wszystkich artykulow
   const articles = document.querySelectorAll(optArticleSelector);
+
+  //zmienna do przychowywania kodu html wszystkich linokow
+  //let html = '';
+
   //dla kazdego artykulu
   for(let article of articles) {
     const articleId = article.getAttribute('id');
@@ -64,8 +68,12 @@ const generateTitleLinks = function () {
     }
   }
 
+  //wstawienie wszyskich linkow naraz do listy tytulow
+  //titleList.innerHTML = html;
+
   //nasluchiwanie klikniecia nowych linkow
   const links = document.querySelectorAll('.titles a');
+  console.log('to zawiera stala links: ',  links);
   for (let link of links) {
     link.addEventListener('click', titleClickHandler)
   }
