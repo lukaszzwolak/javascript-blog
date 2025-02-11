@@ -1,5 +1,5 @@
-const optArticleSelector = '.post-title',
-  optTitleSelector = '.post-title',
+const optArticleSelector = '.post',
+  optTitleSelector = 'h3.post-title',
   optTitleListSelector = '.titles';
 
 const titleClickHandler = function (event) {
@@ -44,15 +44,24 @@ const generateTitleLinks = function () {
   titleList.innerHTML = '';
 
   //znalezienie wszystkich artykulow
-  const articles = document.querySelectorAll('.posts .post');
+  const articles = document.querySelectorAll(optArticleSelector);
   //dla kazdego artykulu
   for(let article of articles) {
     const articleId = article.getAttribute('id');
-    const articleTitle = article.querySelector(optArticleSelector).innerText;
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-    console.log('wygenerowany link html: ', linkHTML);
-    //dodaje link do listy
-    titleList.innerHTML += linkHTML;
+    if(!articleId) {
+      console.warn('artykul nie ma atrybutu id', article);
+      continue;
+    }
+    const articleTitleElement = article.querySelector(optTitleSelector);
+    if (articleTitleElement){
+      const articleTitle = articleTitleElement.innerText;
+      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      console.log('Wygenerowany link HTML:', linkHTML);
+      // Dodaj link do listy
+      titleList.insertAdjacentHTML('beforeend', linkHTML);
+    } else {
+      console.error('Nie znaleziono tytułu dla artykułu o id', articleId);
+    }
   }
 
   //nasluchiwanie klikniecia nowych linkow
