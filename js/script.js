@@ -1,7 +1,8 @@
 {
   const optArticleSelector = '.post',
     optTitleSelector = '.post-title',
-    optTitleListSelector = '.titles';
+    optTitleListSelector = '.titles',
+    optArticleTagsSelector = '.post-tags .list';
 
   const titleClickHandler = function (event) {
     event.preventDefault();
@@ -81,9 +82,38 @@
   };
   //wywoalnie generatetitlelinks po zaladowaniu strony
   generateTitleLinks();
+
+  function generateTags() {
+    console.log('funkcja generateTags dziala')
+    /* find all articles */
+    const articles = document.querySelectorAll(optArticleSelector);
+    /* START LOOP: for every article: */
+    for (let article of articles) {
+      /* find tags wrapper */
+      const tagsWrapper = article.querySelector(optArticleTagsSelector);
+      /* make html variable with empty string */
+      let html = '';
+      /* get tags from data-tags attribute */
+      const articleTags = article.getAttribute('data-tags');
+      console.log('Pobrane tagi: ', articleTags);
+      /* split tags into array */
+      const tags = 'design tutorials';
+      const tagsArray = tags.split(' ');
+      console.log(tagsArray);
+      /* START LOOP: for each tag */
+      for (let tag of tagsArray) {
+        /* generate HTML of the link */
+        const linkHTML = '<li><a href="#tag-${tag}">${tag}</a></li>';
+        /* add generated code to html variable */
+        html += linkHTML;
+        /* END LOOP: for each tag */
+      }
+      /* insert HTML of all the links into the tags wrapper */
+      tagsWrapper.innerHTML = html;
+      /* END LOOP: for every article: */
+    }
+  }
+  generateTags();
 }
-/*
-Nie wiem dlaczego cały blog po odpaleniu w wyszukiwarce przesuwa
-się na lewo... Prosiłbym o intrukcję :////
-*/
+
 
