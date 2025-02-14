@@ -31,7 +31,7 @@
     /* find the correct article using the selector (value of 'href' attribute) */
     const targetArticle = document.querySelector(articleSelector);
     console.log('targetArticle', targetArticle);
-    
+
     /* add class 'active' to the correct article */
     targetArticle.classList.add('active');
   };
@@ -51,14 +51,14 @@
     //let html = '';
 
     //dla kazdego artykulu
-    for(let article of articles) {
+    for (let article of articles) {
       const articleId = article.getAttribute('id');
-      if(!articleId) {
+      if (!articleId) {
         console.warn('artykul nie ma atrybutu id', article);
         continue;
       }
       const articleTitleElement = article.querySelector(optTitleSelector);
-      if (articleTitleElement){
+      if (articleTitleElement) {
         const articleTitle = articleTitleElement.innerText;
         const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
         console.log('Wygenerowany link HTML:', linkHTML);
@@ -74,7 +74,7 @@
 
     //nasluchiwanie klikniecia nowych linkow
     const links = document.querySelectorAll('.titles a');
-    console.log('to zawiera stala links: ',  links);
+    console.log('to zawiera stala links: ', links);
     for (let link of links) {
       link.addEventListener('click', titleClickHandler)
     }
@@ -84,5 +84,6 @@
 }
 /*
 Nie wiem dlaczego cały blog po odpaleniu w wyszukiwarce przesuwa
-się na lewo... Prosiłbym o intrukcję ://// 
+się na lewo... Prosiłbym o intrukcję :////
 */
+
