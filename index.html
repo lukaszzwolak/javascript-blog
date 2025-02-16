@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Podstawowa strona HTML">
-    <title>Moja Strona</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Podstawowa strona HTML">
+  <title>Moja Strona</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
   <div class="container">
@@ -20,9 +22,9 @@
       </aside>
 
       <section class="posts">
-        <article class="post active" id="article-1">
+        <article class="post active" id="article-1" data-tags="design tutorials" data-author="Marion Berry">
           <h3 class="post-title">Article 1</h3>
-          <p class="post-author">by Marion Berry</p>
+          <div class="post-author"></div>
           <div class="post-content">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <p>Curabitur a arcu ut nunc ornare tempor. Vestibulum et augue purus.</p>
@@ -30,46 +32,35 @@
           </div>
           <div class="post-tags">
             <p><strong>Tags:</strong></p>
-            <ul class="list list-horizontal">
-              <li><a href="#">design</a></li>
-              <li><a href="#">tutorials</a></li>
-            </ul>
+            <ul class="list list-horizontal"></ul>
           </div>
         </article>
 
-        <article class="post" id="article-2">
+        <article class="post" id="article-2" data-tags="technology innovation AI" data-author="Theo Tabby">
           <h3 class="post-title">Article 2</h3>
-          <p class="post-author">by Theo Tabby</p>
+          <div class="post-author"></div>
           <div class="post-content">
             <p>Phasellus sollicitudin, arcu vel iaculis ullamcorper.</p>
             <p>Integer hendrerit, eros id efficitur dapibus, ante arcu ullamcorper orci.</p>
           </div>
           <div class="post-tags">
             <p><strong>Tags:</strong></p>
-            <ul class="list list-horizontal">
-              <li><a href="#">news</a></li>
-              <li><a href="#">code</a></li>
-            </ul>
+            <ul class="list list-horizontal"></ul>
           </div>
         </article>
 
-        <article class="post" id="article-3">
+        <article class="post" id="article-3" data-tags="travel adventure photography" data-author="George Tuxedp">
           <h3 class="post-title">Article 3</h3>
-          <p class="post-author">by George Tuxedo</p>
+          <div class="post-author"></div>
           <div class="post-content">
             <p>Mauris vel pellentesque turpis, ac sodales nisl.</p>
             <p>Praesent a malesuada metus.</p>
           </div>
           <div class="post-tags">
             <p><strong>Tags:</strong></p>
-            <ul class="list list-horizontal">
-              <li><a href="#">news</a></li>
-              <li><a href="#">reviews</a></li>
-              <li><a href="#">design</a></li>
-            </ul>
+            <ul class="list list-horizontal"></ul>
           </div>
         </article>
-
       </section>
 
       <aside class="sidebar" aria-label="Filtry i autorzy">
@@ -84,10 +75,10 @@
 
         <h2 class="section-title">Authors</h2>
         <ul class="list authors">
-          <li><a href="#"><span class="author-name">Kitty Toebean</span></a></li>
-          <li><a href="#"><span class="author-name">Theo Tabby</span></a></li>
-          <li><a href="#"><span class="author-name">George Tuxedo</span></a></li>
-          <li><a href="#"><span class="author-name">Marion Berry</span></a></li>
+          <li><a href="#author-Kitty Toebean"><span class="author-name">Kitty Toebean</span></a></li>
+          <li><a href="#author-Theo Tabby"><span class="author-name">Theo Tabby</span></a></li>
+          <li><a href="#author-George Tuxedp"><span class="author-name">George Tuxedp</span></a></li>
+          <li><a href="#author-Marion Berry"><span class="author-name">Marion Berry</span></a></li>
         </ul>
       </aside>
 
@@ -96,4 +87,5 @@
 
   <script src="js/script.js"></script>
 </body>
+
 </html>
