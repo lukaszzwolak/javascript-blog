@@ -146,7 +146,7 @@ function addClickListenersToTags() {
 addClickListenersToTags();
 
 function addClickListenersToAuthors() {
-  const authorLinks = document.querySelectorAll('.post-author a, .authors a');// Dodano nasłuchiwanie również dla sidebaru
+  const authorLinks = document.querySelectorAll('.post-author a, .authors a');
   console.log('Dodaję nasłuchiwanie do autorów:', authorLinks);
   for (let authorLink of authorLinks) {
     authorLink.addEventListener('click', authorClickHandler);
