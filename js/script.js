@@ -2,9 +2,10 @@
   const optArticleSelector = '.post',
     optTitleSelector = '.post-title',
     optTitleListSelector = '.titles',
-    optArticleTagsSelector = '.post-tags .list';
+    optArticleTagsSelector = '.post-tags .list',
+    optArticleAuthorSelector = '.post-author';
 
-  const titleClickHandler = function (event) {
+  function titleClickHandler(event) {
     event.preventDefault();
     const clickedElement = this;
     console.log('Link was clicked!');
@@ -16,7 +17,6 @@
     }
 
     /* add class 'active' to the clicked link */
-    console.log('clickedElement:', clickedElement);
     clickedElement.classList.add('active');
 
     /* remove class 'active' from all articles */
@@ -38,36 +38,29 @@
   };
 
   //generiwanie linkow tytulow artykolow
-  const generateTitleLinks = function () {
-    console.log('funkcja generateTitleLinks wykonala się');
+  function generateTitleLinks(customSelector = '') {
+    console.log('funkcja generateTitleLinks wykonala się', customSelector);
     //szukanie kontenera na linki tytulow
     const titleList = document.querySelector(optTitleListSelector);
     //wyczyszczenie zawartosci kontenera
     titleList.innerHTML = '';
 
     //znalezienie wszystkich artykulow
-    const articles = document.querySelectorAll(optArticleSelector);
-
+    const articles = document.querySelectorAll(optArticleSelector + customSelector);
+    console.log('Znalezione artykuly: ', articles);
     //zmienna do przychowywania kodu html wszystkich linokow
     //let html = '';
 
     //dla kazdego artykulu
     for (let article of articles) {
       const articleId = article.getAttribute('id');
-      if (!articleId) {
-        console.warn('artykul nie ma atrybutu id', article);
-        continue;
+      if (!articleId) continue; {
       }
-      const articleTitleElement = article.querySelector(optTitleSelector);
-      if (articleTitleElement) {
-        const articleTitle = articleTitleElement.innerText;
-        const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-        console.log('Wygenerowany link HTML:', linkHTML);
-        // Dodaj link do listy
-        titleList.insertAdjacentHTML('beforeend', linkHTML);
-      } else {
-        console.error('Nie znaleziono tytułu dla artykułu o id', articleId);
-      }
+      const articleTitle = article.querySelector(optTitleSelector).innerText;
+      const linkHTML = `<li><a href="#${articleId}"><span>${articleTitle}</span></a></li>`;
+      console.log('Wygenerowany link HTML:', linkHTML);
+
+      titleList.insertAdjacentHTML('beforeend', linkHTML);
     }
 
     //wstawienie wszyskich linkow naraz do listy tytulow
@@ -79,7 +72,7 @@
     for (let link of links) {
       link.addEventListener('click', titleClickHandler)
     }
-  };
+  }
   //wywoalnie generatetitlelinks po zaladowaniu strony
   generateTitleLinks();
 
@@ -121,10 +114,8 @@
     event.preventDefault();
     /* make new constant named "clickedElement" and give it the value of "this" */
     const clickedElement = this;
-    console.log('Link was clicked!', clickedElement);
     /* make a new constant "href" and read the attribute "href" of the clicked element */
     const href = clickedElement.getAttribute('href');
-    console.log('wartosc href', href);
     /* make a new constant "tag" and extract tag from the "href" constant */
     const tag = href.replace('#tag-', '');
     console.log('Wyodrębniony tag: ', tag);
@@ -159,7 +150,74 @@
     }
   }
 
-  addClickListenersToTags();
+  function generateAuthors() {
+    console.log('Funkcja generateAuthors działa');
+
+    const articles = document.querySelectorAll(optArticleSelector);
+
+    for (let article of articles) {
+      const authorWrapper = article.querySelector(optArticleAuthorSelector);
+      const articleAuthor = article.getAttribute('data-author');
+
+      console.log('Pobrany autor:', articleAuthor);
+
+      if (!articleAuthor) {
+        console.warn('Brak autora w artykule:', article);
+        continue;
+      }
+
+      const authorHTML = `<a href="#author-${articleAuthor}">${articleAuthor}</a>`;
+      console.log('Wygenerowany link do autora:', authorHTML);
+
+      authorWrapper.innerHTML = authorHTML;
+    }
+  }
+
+
+
+  function authorClickHandler(event) {
+    event.preventDefault();
+    const clickedElement = this;
+
+    const href = clickedElement.getAttribute('href');
+    const author = href.replace('#author-', '');
+    console.log('Wyodrębniony autor:', author);
+
+    /* Znalezienie wszystkich aktywnych linków */
+    const activeAuthorLinks = document.querySelectorAll('.post-author a.active');
+
+    /* Usunięcie klasy "active" */
+    for (let activeAuthor of activeAuthorLinks) {
+      activeAuthor.classList.remove('active');
+    }
+
+    /* Znalezienie linków do tego samego autora */
+    const authorLinks = document.querySelectorAll(`a[href="${href}"]`);
+
+    /* Dodanie klasy "active" */
+    for (let authorLink of authorLinks) {
+      authorLink.classList.add('active');
+    }
+
+    /* Filtruj artykuły według autora */
+    generateTitleLinks(`[data-author="${author}"]`);
+  }
+
+
+  function addClickListenersToAuthors() {
+    const authorLinks = document.querySelectorAll('.post-author a');
+
+    if (authorLinks.length === 0) {
+      console.warn('Nie znaleziono linków do autorów!');
+    }
+
+    for (let authorLink of authorLinks) {
+      console.log('Dodawanie nasłuchiwania do autora:', authorLink.innerText);
+      authorLink.addEventListener('click', authorClickHandler);
+    }
+  }
+
 }
-
-
+generateTitleLinks();
+generateAuthors();
+addClickListenersToAuthors();
